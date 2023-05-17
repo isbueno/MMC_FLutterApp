@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+
 class Sobre extends StatelessWidget{
   const Sobre({super.key});
  
@@ -40,7 +42,7 @@ class Sobre extends StatelessWidget{
               ],
             ),
           ),
-      )
+      ),
     );
   }
 }
