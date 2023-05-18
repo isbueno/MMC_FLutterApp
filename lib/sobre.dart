@@ -9,6 +9,7 @@ class Sobre extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xff1c8db9),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[

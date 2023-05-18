@@ -40,7 +40,7 @@ class _FooterState extends State<Footer> {
         items: const[
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Color(0xff333333),),
-            label: "home",
+            label: 'home',
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.calculate_outlined, color: Color(0xff333333),),
