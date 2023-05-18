@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'bottom_navigation_model.dart';
 
 
 class Calcular extends StatefulWidget {
@@ -11,30 +12,39 @@ class Calcular extends StatefulWidget {
 }
 
 class _CalcularState extends State<Calcular>{
-  
-  TextEditingController value1Controller = TextEditingController();
-  TextEditingController value2Controller = TextEditingController();
+  /*BottomNavigationBar links */
+  int _currentPageIndex = 1;
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentPageIndex = index;
+    });
+  }
+
+  /* Parte do cálculo do MMC */
+  TextEditingController num1Controller = TextEditingController();
+  TextEditingController num2Controller = TextEditingController();
   String resultado = '';
 
-  int calculateMMC(int a, int b) {
-    int gcd = calculateGCD(a, b);
+  int calcularMmc(int a, int b) {
+    int gcd = calcularPercentual(a, b);
     int lcm = (a * b) ~/ gcd;
     return lcm;
   }
 
-  int calculateGCD(int a, int b) {
+  int calcularPercentual(int a, int b) {
     if (b == 0) {
       return a;
     }
-    return calculateGCD(b, a % b);
+    return calcularPercentual(b, a % b);
   }
 
   void calculateButtonPressed() {
-    int value1 = int.tryParse(value1Controller.text) ?? 0;
-    int value2 = int.tryParse(value2Controller.text) ?? 0;
-    int mmc = calculateMMC(value1, value2);
+    int num1 = int.tryParse(num1Controller.text) ?? 0;
+    int num2 = int.tryParse(num2Controller.text) ?? 0;
+    int mmc = calcularMmc(num1, num2);
     setState(() {
-      resultado = 'O MMC de $value1 e $value2 é: $mmc';
+      resultado = 'O MMC de $num1 e $num2 é: $mmc';
     });
   }
 
@@ -79,7 +89,7 @@ class _CalcularState extends State<Calcular>{
                   Column(
                     children: [
                       TextField(
-                        controller: value1Controller,
+                        controller: num1Controller,
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'Insira o Primeiro número',
@@ -88,7 +98,7 @@ class _CalcularState extends State<Calcular>{
                       ),
                       const SizedBox(height: 16.0),
                       TextField(
-                        controller: value2Controller,
+                        controller: num2Controller,
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'Insira o Segundo número',
@@ -108,7 +118,11 @@ class _CalcularState extends State<Calcular>{
           ],
       ),
       ),
-      )
+      ),
+      bottomNavigationBar: BottomNavigationModel(
+        currentPageIndex: _currentPageIndex,
+        onPageChanged: _onPageChanged,
+      ),
     );
   }
 }
